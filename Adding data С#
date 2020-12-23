@@ -1,0 +1,28 @@
+            try
+            {
+                Passport newPassport = new Passport();
+                Flight newFlight = new Flight();
+                Check newCheck = new Check();
+                newPassport.Surname = surnameTxb.Text;
+                newPassport.Name = nameTxb.Text;
+                newPassport.Patronymic = patronymicTxb.Text;
+                newPassport.DateOfBirth = Convert.ToDateTime(dateOfBirthTxb.Text);
+                newPassport.Registration = registrationTxb.Text;
+                newFlight.DepartureCity = depCityTxb.Text;
+                newFlight.DepartureDateTime = depTimeTxb.Text;
+                newFlight.ArrivalCity = arrCityTxb.Text;
+                newFlight.ArrivalDateTime = arrTimeTxb.Text;
+                newCheck.FlightID = newFlight.ID;
+                newCheck.PassportID = newPassport.ID;
+                connectClass.db.Check.Add(newCheck);
+                connectClass.db.Passport.Add(newPassport);
+                connectClass.db.Flight.Add(newFlight);
+                connectClass.db.SaveChanges();
+                MessageBox.Show("Данные о новом рейсе внесены!", "Уведомление системы", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.GoBack();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, ex.Source + " выдал исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
