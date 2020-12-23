@@ -1,0 +1,83 @@
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            dataView.ItemsSource = connectClass.db.Check.ToList();
+        }
+        
+        -----------------------------------------------------------
+        
+     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Left">
+                <Button x:Name="backBtn"
+                        Content="Назад"
+                        FontSize="12"
+                        Width="100"
+                        Height="28"
+                        Margin="10,0,0,0"
+                        Click="backBtn_Click"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                <TextBlock Text="Поиск:"
+                           FontSize="17"
+                           FontWeight="SemiBold"
+                           Width="70"/>
+                <TextBox x:Name="searchTxb"
+                         FontSize="17"
+                         Width="300" TextChanged="searchTxb_TextChanged"/>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="dataView"
+                  AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID"  Binding="{Binding Passport.ID}" Width="0.9*"/>
+                    <DataGridTextColumn Header="Фамилия"  Binding="{Binding Passport.Surname}" Width="*"/>
+                    <DataGridTextColumn Header="Имя"  Binding="{Binding Passport.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Отчество"  Binding="{Binding Passport.Patronymic}" Width="*"/>
+                    <DataGridTextColumn Header="Дата рождения"  Binding="{Binding Passport.DateOfBirth}" Width="*"/>
+                    <DataGridTextColumn Header="Город прописки"  Binding="{Binding Passport.Registration}" Width="*"/>
+                    <DataGridTextColumn Header="Город вылета" Binding="{Binding Flight.DepartureCity}" Width="*"/>
+                    <DataGridTextColumn Header="Время вылета" Binding="{Binding Flight.DepartureDateTime}" Width="*"/>
+                    <DataGridTextColumn Header="Город прибытия" Binding="{Binding Flight.ArrivalCity}" Width="*"/>
+                    <DataGridTextColumn Header="Время прибытия" Binding="{Binding Flight.ArrivalDateTime}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                <Button x:Name="deleteBtn"
+                        Content="Удалить"
+                        FontSize="12"
+                        Width="100"
+                        Height="28"
+                        Margin="0,0,10,0"
+                        Click="deleteBtn_Click"/>
+                <Button x:Name="updateBtn"
+                        Content="Изменить"
+                        FontSize="12"
+                        Width="100"
+                        Height="28"
+                        Margin="0,0,10,0"
+                        Click="updateBtn_Click"/>
+                <Button x:Name="addBtn"
+                        Content="Добавить"
+                        FontSize="12"
+                        Width="100"
+                        Height="28"
+                        Click="addBtn_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
