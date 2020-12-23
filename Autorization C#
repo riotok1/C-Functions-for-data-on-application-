@@ -1,0 +1,28 @@
+            try
+            {
+                var currentUser = connectClass.db.SignIn.FirstOrDefault(item => item.Login == loginTxb.Text && item.Password == passwordTxb.Password);
+                if (currentUser == null)
+                    MessageBox.Show("Вы ввели неверные данные авторизации! Пожалуйста, повторите попытку...", "Не верно!",
+                        MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                else
+                {
+                    switch (currentUser.IDRole)
+                    {
+                        case "A":
+                            MessageBox.Show("Добро пожаловать, администратор!");
+                            autorizationWindow main = new autorizationWindow();
+                            main.ShowDialog();
+                            break;
+                        case "U":
+                            MessageBox.Show("Добро пожаловать!");
+                            break;
+                    }
+                }
+                loginTxb.Text = "";
+                passwordTxb.Password = "";
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, ex.Source + "выдал исключение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
