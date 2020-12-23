@@ -1,0 +1,22 @@
+            try
+            {
+                Check deleteCheck = (Check)dataView.SelectedItem;
+                if (MessageBox.Show("Вы действительно хотите удалить выбранный элемент? Данные будут удалены навсегда", "Вы уверены?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    if (deleteCheck != null)
+                    {
+                        connectClass.db.Check.Remove(deleteCheck);
+                        connectClass.db.SaveChanges();
+                        Page_Loaded(null, null);
+                    }
+                    else
+                    {
+                        throw new Exception("Для удаления выберите элемент из спика");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
