@@ -1,0 +1,6 @@
+private void searchTxb_TextChanged(object sender, TextChangedEventArgs e)
+{
+  dataView.ItemsSource = connectClass.db.Check.Where(item => item.Passport.Surname.Contains(searchTxb.Text) 
+  || item.Passport.Name.Contains(searchTxb.Text) || item.Passport.Registration.Contains(searchTxb.Text) 
+  || item.Flight.DepartureCity.Contains(searchTxb.Text) || item.Flight.ArrivalCity.Contains(searchTxb.Text) ).ToList();
+}
