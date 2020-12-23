@@ -1,0 +1,74 @@
+    public partial class editPage : Page
+    {
+        private Check selectedItem;
+        public editPage()
+        {
+            InitializeComponent();
+        }
+
+        private void editBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Check checkSave = connectClass.db.Check.FirstOrDefault(item => item.Passport.ID == selectedItem.Passport.ID);
+                checkSave.Passport.Surname = surnameTxb.Text;
+                checkSave.Passport.Name = nameTxb.Text;
+                checkSave.Passport.Patronymic = patronymicTxb.Text;
+                checkSave.Passport.DateOfBirth = Convert.ToDateTime(dateOfBirthTxb.Text);
+                checkSave.Passport.Registration = registrationTxb.Text;
+                checkSave.Flight.DepartureCity = depCityTxb.Text;
+                checkSave.Flight.DepartureDateTime = depTimeTxb.Text;
+                checkSave.Flight.ArrivalCity = arrCityTxb.Text;
+                checkSave.Flight.ArrivalDateTime = arrTimeTxb.Text;
+                connectClass.db.SaveChanges();
+                MessageBox.Show("Данные успешно изменены!");
+                NavigationService.GoBack();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButton.OK, MessageBoxImage.Error);                
+            }
+        }
+        
+        public editPage(Check selectedItem)
+        {
+            InitializeComponent();
+            this.selectedItem = selectedItem;
+            surnameTxb.Text = selectedItem.Passport.Surname;
+            nameTxb.Text = selectedItem.Passport.Name;
+            patronymicTxb.Text = selectedItem.Passport.Patronymic;
+            dateOfBirthTxb.Text = Convert.ToString(selectedItem.Passport.DateOfBirth);
+            registrationTxb.Text = selectedItem.Passport.Registration;
+            depCityTxb.Text = selectedItem.Flight.DepartureCity;
+            depTimeTxb.Text = selectedItem.Flight.DepartureDateTime;
+            arrCityTxb.Text = selectedItem.Flight.ArrivalCity;
+            arrTimeTxb.Text = selectedItem.Flight.ArrivalDateTime;
+            
+        }
+
+        private void backBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+    }
+    
+    ----------------------------------------------------------------------
+    
+       private void updateBtn_Click(object sender, RoutedEventArgs e)
+       {
+            try
+            {
+                Check egitAvia = (Check)dataView.SelectedItem;
+                if (egitAvia != null)
+                    NavigationService.Navigate(new editPage(egitAvia));
+                else
+                {
+                    throw new Exception("Вы не выбрали элемент!");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
