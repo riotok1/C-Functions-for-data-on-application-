@@ -1,0 +1,26 @@
+private void imageBtn_Click(object sender, RoutedEventArgs e)
+{
+  try
+    {
+      OpenFileDialog imgFile = new OpenFileDialog();
+      imgFile.Filter = "Image (*.jpg; *.png;) | *.jpg; *.png;";
+      if (imgFile.ShowDialog() == true)
+      {
+        BitmapImage imgBitmap = new BitmapImage(new Uri(imgFile.FileName));
+        imgLoad.Source = imgBitmap;
+      }
+    }
+  catch (Exception ex)
+   {
+     MessageBox.Show(ex.Message);
+   }
+}
+
+-------------------------------------------------------------------------------
+Add page
+
+MemoryStream stream = new MemoryStream();
+JpegBitmapEncoder encorder = new JpegBitmapEncoder();
+encorder.Frames.Add(BitmapFrame.Create((BitmapImage)imgLoad.Source));
+encorder.Save(stream);
+newCar.CarImg = stream.ToArray();
