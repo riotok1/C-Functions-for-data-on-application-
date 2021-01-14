@@ -1,0 +1,4 @@
+private void Page_Loaded(object sender, RoutedEventArgs e)
+{
+    listData.ItemsSource = connectClass.db.Car.Where(item => item.ID == selectedItem.ID && item.CountryID == selectedItem.CountryManufacture.ID && item.SpecID == selectedItem.Specifications.ID && item.Specifications.SizeID == selectedItem.Specifications.Size.ID).ToList();
+}
