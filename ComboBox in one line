@@ -1,0 +1,6 @@
+//Intialization
+typeCmb.itemsSource = connectClass.db.Type.Select(item => item.Title);
+
+//Adding
+var cmbType = connectClass.db.Type.FirstOrDefault(item => item.Title == typeCmb);
+newProduct.typeID = cmbType.ID;
