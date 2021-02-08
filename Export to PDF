@@ -1,0 +1,13 @@
+try
+{
+    this.IsEnabled = false;
+    PrintDialog printDialog = new PrintDialog();
+    if(printDialog.ShowDialog() == true)
+    {
+       printDialog.PrintVisual(datavIew, "invoice");
+    }
+}
+finally
+{
+  this.IsEnabled = true;
+}
