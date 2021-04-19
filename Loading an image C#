@@ -1,3 +1,28 @@
+-------------------------------------------------------------------------------
+Edit page
+
+public EditPage(WorkersConnect selectedItem)
+ {
+    InitializeComponent();
+    this.selectedItem = selectedItem;
+
+    if (selectedItem.Workers.WorkerImg != null)
+    {
+        BitmapImage bitmap = new BitmapImage();
+        using (MemoryStream stream = new MemoryStream(selectedItem.Workers.WorkerImg))
+        {
+            bitmap.BeginInit();
+            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+            bitmap.StreamSource = stream;
+            bitmap.EndInit();
+        }
+        imgLoad.Source = bitmap;
+     }
+ }
+
+-------------------------------------------------------------------------------
+Open img
+
 private void imageBtn_Click(object sender, RoutedEventArgs e)
 {
   try
